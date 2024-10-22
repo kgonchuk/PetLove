@@ -5,12 +5,15 @@ import {
   AuthTitle,
   BtnContainer,
   ContainerForm,
+  FeedbackMessage,
   FormField,
+  FormStyle,
   FormWrap,
   InputField,
   InputGroup,
   LinkText,
   LinkWrap,
+  LogInBtn,
   RegisterLink,
 } from "./Auth.styled";
 import * as Yup from "yup";
@@ -39,41 +42,60 @@ export default function LoginForm() {
         <AuthText>
           Welcome! Please enter your credentials to login to the platform:
         </AuthText>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={schema}
-          onSubmit={handleSubmit}
-        >
+        <Formik initialValues={initialValues} validationSchema={schema}>
           {({ errors, touched }) => (
-            <Form>
+            <FormStyle>
               <ContainerForm>
                 <InputGroup>
                   <FormField>
                     <InputField
-                      id="email"
                       name="email"
                       type="email"
                       placeholder="Email"
+                      style={{
+                        borderColor:
+                          touched.email && errors.email
+                            ? "red"
+                            : touched.email && !errors.email
+                            ? "green"
+                            : "defaultColor",
+                      }}
                     />
+                    {touched.email && !errors.email && (
+                      <FeedbackMessage>Enter a valid Email</FeedbackMessage>
+                    )}
                   </FormField>
                   <FormField>
                     <InputField
-                      id="password"
                       name="password"
                       type="password"
                       placeholder="Password"
+                      style={{
+                        borderColor:
+                          touched.email && errors.email
+                            ? "red"
+                            : touched.email && !errors.email
+                            ? "green"
+                            : "defaultColor",
+                        paddingLeft: "12px",
+                      }}
                     />
+                    {touched.password && !errors.password && (
+                      <FeedbackMessage>Password is secure</FeedbackMessage>
+                    )}
                   </FormField>
                 </InputGroup>
-                {/* <BtnContainer>
-                  <LoginForm>Log In</LoginForm>
+                <BtnContainer>
+                  <LogInBtn>Log In</LogInBtn>
                   <LinkWrap>
-                    <LinkText>Don’t have an account? </LinkText>{" "}
-                    <RegisterLink to="/registartion">Register</RegisterLink>
+                    <LinkText>
+                      Don’t have an account?
+                      <RegisterLink to="/registration">Register</RegisterLink>
+                    </LinkText>
                   </LinkWrap>
-                </BtnContainer> */}
+                </BtnContainer>
               </ContainerForm>
-            </Form>
+            </FormStyle>
           )}
         </Formik>
       </FormWrap>

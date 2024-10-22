@@ -74,7 +74,7 @@ export const HomePageText = styled.p`
   }
 `;
 export const HomePageImg = styled.div`
-  width: 320px;
+  width: 335px;
   height: 402px;
   background: url(${BgMob}) no-repeat center center;
   border-radius: 30px;
@@ -90,7 +90,7 @@ export const HomePageImg = styled.div`
   }
   @media only screen and (min-width: ${breakpoints.medium}) {
     border-radius: 60px;
-    width: 768px;
+    width: 704px;
     height: 496px;
 
     background: url(${BgTab}) no-repeat center center;

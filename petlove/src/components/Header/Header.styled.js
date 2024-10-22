@@ -12,8 +12,7 @@ export const HeaderContainer = styled.header`
   justify-content: space-between;
   align-items: center;
 
-  padding: ${(props) =>
-    props.ishomepage === "true" ? "28px 40px" : "28px 20px"};
+  padding: ${(props) => (props.ishomepage === "true" ? "28px 20px" : "28px 0")};
 
   /* margin-bottom: ${(props) => getMarginBottom(props).small}; */
 
@@ -21,7 +20,7 @@ export const HeaderContainer = styled.header`
     /* margin-top: ${({ $isHomePage }) => ($isHomePage ? "16px" : 0)}; */
     /* padding: ${({ $isHomePage }) => ($isHomePage ? "0px 32px" : 0)}; */
     padding: ${(props) =>
-      props.ishomepage === "true" ? "28px 64px" : "28px 32px"};
+      props.ishomepage === "true" ? "28px 32px" : "28px 0"};
 
     /* margin-bottom: ${(props) => getMarginBottom(props).medium}; */
     /* padding: 10px 32px; */
