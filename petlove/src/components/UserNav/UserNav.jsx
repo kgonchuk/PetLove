@@ -8,14 +8,23 @@ import {
 } from "./UserNav.styled";
 import { useLocation } from "react-router-dom";
 import icon from "../../images/sprite.svg";
+import { useDispatch } from "react-redux";
+import { logOut } from "../../redux/auth/authOperation";
 
 export const UserNav = () => {
+  const dispatch = useDispatch();
   const location = useLocation();
   const ishomepage = (location.pathname === "/home").toString();
 
   return (
     <UserNavContainer>
-      <LogOutBtn ishomepage={ishomepage}>Log Out</LogOutBtn>
+      <LogOutBtn
+        type="button"
+        onClick={() => dispatch(logOut())}
+        ishomepage={ishomepage}
+      >
+        Log Out
+      </LogOutBtn>
 
       <UserProfile to="/profile" ishomepage={ishomepage}>
         <SvgIcon ishomepage={ishomepage}>

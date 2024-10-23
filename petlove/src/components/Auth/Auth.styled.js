@@ -9,16 +9,19 @@ export const AuthContainer = styled.div`
   background-color: ${color.white};
   padding: 60px 20px;
   width: 295px;
+  padding: ${(props) => (props.isregisterpage === "true" ? "27px " : "71px")}
+    20px;
   @media only screen and (min-width: ${breakpoints.medium}) {
-    padding: 71px 140px;
     border-radius: 60px;
     width: 424px;
+    padding: ${(props) => (props.isregisterpage === "true" ? "30px " : "71px")}
+      140px;
   }
   @media only screen and (min-width: ${breakpoints.large}) {
     margin-right: -32px;
     padding: 118px 84px;
-
-    /* width: 592px; */
+    padding: ${(props) => (props.isregisterpage === "true" ? "69px " : "114px")}
+      84px;
   }
 `;
 export const FormStyle = styled(Form)`
@@ -47,7 +50,22 @@ export const AuthText = styled.h2`
   font-size: 14px;
   line-height: 1.29;
   letter-spacing: -0.02em;
-  margin-bottom: 24px;
+
+  color: ${color.black};
+  margin-bottom: ${(props) =>
+    props.isregisterpage === "true" ? "20px " : "24px"};
+  @media only screen and (min-width: ${breakpoints.medium}) {
+    font-size: 18px;
+    line-height: 1.22;
+    margin-bottom: 32px;
+  }
+`;
+export const AuthTextRegister = styled.h2`
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
   color: ${color.black};
 
   @media only screen and (min-width: ${breakpoints.medium}) {
@@ -59,7 +77,9 @@ export const AuthText = styled.h2`
 export const ContainerForm = styled.div``;
 
 export const InputGroup = styled.div``;
-export const FormField = styled.div``;
+export const FormField = styled.div`
+  position: relative;
+`;
 export const InputField = styled(Field)`
   border: 1px solid ${color.accentBlack};
   outline: none;
@@ -68,14 +88,16 @@ export const InputField = styled(Field)`
   line-height: 1.29;
   letter-spacing: -0.03em;
   color: ${color.secondaryBlack};
-  width: 292px;
+  width: 281px;
   height: 40px;
-
+  padding: 0;
+  padding-left: 12px;
   @media only screen and (min-width: ${breakpoints.medium}) {
     margin-bottom: 16px;
     width: 410px;
     height: 52px;
     padding: 0;
+    padding-left: 16px;
   }
 `;
 export const BtnContainer = styled.div``;
@@ -93,11 +115,14 @@ export const LogInBtn = styled.button`
   width: 295px;
   height: 42px;
   padding: 12px 0;
-  margin-top: 30px;
+  margin-top: ${(props) =>
+    props.isregisterpage === "true" ? "14px " : "30px"};
   @media only screen and (min-width: ${breakpoints.medium}) {
     margin-top: 48px;
     width: 424px;
     height: 52px;
+    margin-top: ${(props) =>
+      props.isregisterpage === "true" ? "16px " : "48px"};
   }
 `;
 export const LinkWrap = styled.div`
@@ -122,3 +147,16 @@ export const RegisterLink = styled(NavLink)`
   color: ${color.yellowPrimary};
 `;
 export const FeedbackMessage = styled.div``;
+export const Icon = styled.svg`
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  width: 18px;
+  height: 18px;
+  @media only screen and (min-width: ${breakpoints.medium}) {
+    width: 22px;
+    height: 22px;
+    top: 15px;
+    right: 15px;
+  }
+`;

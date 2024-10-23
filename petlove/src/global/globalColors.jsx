@@ -7,6 +7,7 @@ const color = {
   grey: "rgba(38, 38, 38, 0.15)",
   accentBlack: "rgba(38, 38, 38, 0.15)",
   secondaryBlack: "rgba(38, 38, 38, 0.5)",
+  textBlack: "rgba(43, 43, 42, 1)",
 };
 
 export default color;

@@ -173,9 +173,7 @@ export const LogOutBtn = styled.button`
   padding: 12px 40px;
   border-color: transparent;
   background-color: ${(props) =>
-    props.ishomepage === "true"
-      ? `${color.white}`
-      : `${color.yellowSecondary}`};
+    props.ishomepage === "true" ? `${color.yellowPrimary}` : `${color.white}`};
   color: ${(props) =>
     props.ishomepage === "true" ? `${color.white}` : `${color.yellowPrimary}`};
 `;

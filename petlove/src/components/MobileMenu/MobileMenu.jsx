@@ -14,8 +14,11 @@ import {
   MobileNavList,
 } from "./MobileMenu.styled";
 import { useAuth } from "../../hooks/useAuth";
+import { logOut } from "../../redux/auth/authOperation";
+import { useDispatch } from "react-redux";
 
 export const MobileMenu = ({ ishomepage, onClose }) => {
+  const dispatch = useDispatch();
   const { isLoggedIn } = useAuth();
 
   const handleBackDropClick = (e) => {
@@ -100,9 +103,15 @@ export const MobileMenu = ({ ishomepage, onClose }) => {
               </li>
             </MobileNavList>
           </MobileNav>
-          {/* <LogOutBtn>LOG OUT</LogOutBtn> */}
+
           {isLoggedIn ? (
-            <LogOutBtn></LogOutBtn>
+            <LogOutBtn
+              type="button"
+              onClick={() => dispatch(logOut())}
+              ishomepage={ishomepage}
+            >
+              LOG OUT
+            </LogOutBtn>
           ) : (
             <AuthMobContainer>
               <AuthMobList>

@@ -21,6 +21,7 @@ export const Header = () => {
   const { isLoggedIn } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+
   const ishomepage = (location.pathname === "/home").toString();
 
   const openMobileMenu = () => {
@@ -60,8 +61,6 @@ export const Header = () => {
         </Navlist>
 
         {isLoggedIn ? <UserNav /> : <AuthNav />}
-        {/* <UserNav /> */}
-        {/* <AuthNav /> */}
 
         <BurgerBtn
           type="button"

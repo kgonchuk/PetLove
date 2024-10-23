@@ -63,7 +63,11 @@
 
 import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./Layout/Layout";
-import { lazy } from "react";
+import { lazy, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useAuth } from "../hooks/useAuth";
+import { refreshUser } from "../redux/auth/authOperation";
+import RestrictedRoute from "./RestrictedRoute";
 
 const HomePage = lazy(() => import("../pages/HomePage"));
 const News = lazy(() => import("../pages/News"));
@@ -71,9 +75,15 @@ const Notices = lazy(() => import("../pages/Notices"));
 const Friends = lazy(() => import("../pages/Friends"));
 const Login = lazy(() => import("../pages/LoginPage"));
 const Registration = lazy(() => import("../pages/RegistrationPage"));
-const Profile = lazy(() => import("../pages/Profile"));
+const Profile = lazy(() => import("../pages/ProfilePage"));
 
 function App() {
+  const dispatch = useDispatch();
+  const { isRefreshing } = useAuth();
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
@@ -82,8 +92,21 @@ function App() {
         <Route path="/news" element={<News />} />
         <Route path="/notices" element={<Notices />} />
         <Route path="/friends" element={<Friends />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/registration" element={<Registration />} />
+        <Route
+          path="login"
+          element={
+            <RestrictedRoute redirectTo="/profile" component={<Login />} />
+          }
+        />
+        <Route
+          path="/registration"
+          element={
+            <RestrictedRoute
+              redirectTo="/profile"
+              component={<Registration />}
+            />
+          }
+        />
         <Route path="/profile" element={<Profile />} />
       </Route>
     </Routes>

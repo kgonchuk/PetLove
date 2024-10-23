@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   AuthContainer,
   AuthText,
@@ -9,6 +9,7 @@ import {
   FormField,
   FormStyle,
   FormWrap,
+  Icon,
   InputField,
   InputGroup,
   LinkText,
@@ -18,6 +19,10 @@ import {
 } from "./Auth.styled";
 import * as Yup from "yup";
 import { Field, Form, Formik } from "formik";
+import icon from "../../images/sprite.svg";
+import { useDispatch } from "react-redux";
+import { logIn } from "../../redux/auth/authOperation";
+import { useNavigate } from "react-router-dom";
 
 const initialValues = {
   email: "",
@@ -33,8 +38,25 @@ const schema = Yup.object({
     .min(7, "Password must be at least 7 characters"),
 });
 
-const handleSubmit = () => {};
 export default function LoginForm() {
+  const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const toogleShowPassword = () => {
+    setShowPassword((prevState) => !prevState);
+  };
+
+  const handleSubmit = (values, { resetForm }) => {
+    const userData = {
+      email: values.email.trim(),
+      password: values.password.trim(),
+    };
+
+    dispatch(logIn(userData));
+    navigate("/profile");
+    resetForm();
+  };
   return (
     <AuthContainer>
       <FormWrap>
@@ -42,7 +64,11 @@ export default function LoginForm() {
         <AuthText>
           Welcome! Please enter your credentials to login to the platform:
         </AuthText>
-        <Formik initialValues={initialValues} validationSchema={schema}>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={schema}
+          onSubmit={handleSubmit}
+        >
           {({ errors, touched }) => (
             <FormStyle>
               <ContainerForm>
@@ -61,6 +87,16 @@ export default function LoginForm() {
                             : "defaultColor",
                       }}
                     />
+                    {touched.email && errors.email ? (
+                      <Icon>
+                        <use href={`${icon}#red-false`} />
+                      </Icon>
+                    ) : (
+                      <Icon>
+                        <use href={`${icon}#green-success`} />
+                      </Icon>
+                    )}
+
                     {touched.email && !errors.email && (
                       <FeedbackMessage>Enter a valid Email</FeedbackMessage>
                     )}
@@ -77,16 +113,42 @@ export default function LoginForm() {
                             : touched.email && !errors.email
                             ? "green"
                             : "defaultColor",
-                        paddingLeft: "12px",
                       }}
                     />
+                    {touched.password && errors.password ? (
+                      <Icon>
+                        <use href={`${icon}#red-false`} />
+                      </Icon>
+                    ) : !errors.password && touched.password ? (
+                      <Icon>
+                        <use href={`${icon}#green-success`} />
+                      </Icon>
+                    ) : showPassword ? (
+                      <Icon
+                        onMouseDown={(e) => {
+                          e.preventDefault();
+                          toogleShowPassword();
+                        }}
+                      >
+                        <use href={`${icon}#open-eye`} />
+                      </Icon>
+                    ) : (
+                      <Icon
+                        onMouseDown={(e) => {
+                          e.preventDefault();
+                          toogleShowPassword();
+                        }}
+                      >
+                        <use href={`${icon}#close-eye`} />
+                      </Icon>
+                    )}
                     {touched.password && !errors.password && (
                       <FeedbackMessage>Password is secure</FeedbackMessage>
                     )}
                   </FormField>
                 </InputGroup>
                 <BtnContainer>
-                  <LogInBtn>Log In</LogInBtn>
+                  <LogInBtn type="submit">Log In</LogInBtn>
                   <LinkWrap>
                     <LinkText>
                       Don’t have an account?

@@ -18,7 +18,7 @@ export const register = createAsyncThunk(
     try {
       const res = await axios.post("users/signup", userData);
       setAuthHeader(res.data.token);
-
+      Notiflix.Notify.success("Welcome to PetLove project!");
       return res.data;
     } catch (error) {
       Notiflix.Notify.failure(error.response.data.message);
@@ -33,6 +33,7 @@ export const logIn = createAsyncThunk(
     try {
       const res = await axios.post("/users/signin", userData);
       setAuthHeader(res.data.token);
+      Notiflix.Notify.success("Welcome back to PetLove project!");
       return res.data;
     } catch (error) {
       Notiflix.Notify.failure(error.response.data.message);
@@ -45,6 +46,7 @@ export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
     await axios.post("/users/signout");
     clearAuthHeader();
+    Notiflix.Notify.success("We are waiting for you again!");
   } catch (error) {
     Notiflix.Notify.failure(error.response.data.message);
     return thunkAPI.rejectWithValue(error.message);
