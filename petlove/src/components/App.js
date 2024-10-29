@@ -1,66 +1,3 @@
-// import { lazy, Suspense } from "react";
-// import * as ROUTES from "../src/global/routes";
-// import { GlobalStyle } from "./components/GlobalStyle";
-// import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-// import Layout from "./components/Layout/Layout";
-// const HomePage = lazy(() => import("../src/pages/HomePage"));
-// const News = lazy(() => import("../src/pages/News"));
-// const Notices = lazy(() => import("../src/pages/Notices"));
-// const Friends = lazy(() => import("../src/pages/Friends"));
-// const Login = lazy(() => import("../src/pages/Login"));
-// const Registration = lazy(() => import("../src/pages/Login"));
-// const Profile = lazy(() => import("../src/pages/Profile"));
-
-// const appRoutes = [
-//   {
-//     path: ROUTES.HOME_ROUTE,
-//     element: <HomePage />,
-//   },
-//   {
-//     path: ROUTES.NEWS_ROUTE,
-//     element: <News />,
-//   },
-//   {
-//     path: ROUTES.NOTICES_ROUTE,
-//     element: <Notices />,
-//   },
-//   {
-//     path: ROUTES.FRIENDS_ROUTE,
-//     element: <Friends />,
-//   },
-//   {
-//     path: ROUTES.LOGIN_ROUTE,
-//     element: <Login />,
-//   },
-//   {
-//     path: ROUTES.REGISTRATION_ROUTE,
-//     element: <Registration />,
-//   },
-//   {
-//     path: ROUTES.PROFILE_ROUTE,
-//     element: <Profile />,
-//   },
-// ];
-
-// export const App = () => {
-//   return (
-//     <>
-//       <Layout>
-//         <Suspense>
-//           <Routes>
-//             {appRoutes.map(({ path, element }) => (
-//               <Route key={path} path={path} element={element} />
-//             ))}
-//             <Route path="*" element={<Navigate to="/" />} />
-//           </Routes>
-//         </Suspense>
-//       </Layout>
-//     </>
-//   );
-// };
-
-// export default App;
-
 import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./Layout/Layout";
 import { lazy, useEffect } from "react";
@@ -68,9 +5,10 @@ import { useDispatch } from "react-redux";
 import { useAuth } from "../hooks/useAuth";
 import { refreshUser } from "../redux/auth/authOperation";
 import RestrictedRoute from "./RestrictedRoute";
+import { Loader } from "./Loader/Loader.styled";
 
 const HomePage = lazy(() => import("../pages/HomePage"));
-const News = lazy(() => import("../pages/News"));
+const News = lazy(() => import("../pages/NewsPage"));
 const Notices = lazy(() => import("../pages/Notices"));
 const Friends = lazy(() => import("../pages/Friends"));
 const Login = lazy(() => import("../pages/LoginPage"));
@@ -84,7 +22,9 @@ function App() {
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
-  return (
+  return isRefreshing ? (
+    <div>refreshing</div>
+  ) : (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Navigate to="/home" />} />

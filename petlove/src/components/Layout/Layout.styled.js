@@ -15,5 +15,7 @@ export const Container = styled.div`
 
   @media screen and (min-width: ${breakpoints.large}) {
     max-width: 1216px;
+    max-width: ${({ $isHomePage }) => ($isHomePage ? "1216px" : "1155px")};
+    padding: 0 64px;
   }
 `;
