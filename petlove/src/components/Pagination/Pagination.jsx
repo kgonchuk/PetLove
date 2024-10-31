@@ -51,7 +51,7 @@ export default function Pagination({
             <PaginationButton onClick={() => handleCurrentPage(page + 1)}>
               {page + 1}
             </PaginationButton>
-            <PaginationButton disabled>...</PaginationButton>
+            <p disabled>...</p>
           </>
         )}
       </WrapNumb>

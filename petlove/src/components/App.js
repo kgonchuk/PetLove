@@ -9,7 +9,7 @@ import { Loader } from "./Loader/Loader.styled";
 
 const HomePage = lazy(() => import("../pages/HomePage"));
 const News = lazy(() => import("../pages/NewsPage"));
-const Notices = lazy(() => import("../pages/Notices"));
+const Notices = lazy(() => import("../pages/NoticesPage"));
 const Friends = lazy(() => import("../pages/Friends"));
 const Login = lazy(() => import("../pages/LoginPage"));
 const Registration = lazy(() => import("../pages/RegistrationPage"));

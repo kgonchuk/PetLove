@@ -4,7 +4,7 @@ import { breakpoints } from "../../global/breakPoints";
 
 export const FreindsItemContainer = styled.li`
   border-radius: 15px;
-  width: 335px;
+  max-width: 335px;
   /* height: 184px; */
   position: relative;
   background: ${color.white};

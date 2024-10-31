@@ -17,7 +17,8 @@ import {
 } from "./FriendsItem.styled";
 
 const FriendsItem = ({ friendItem }) => {
-  const { imageUrl, url, title, address, email, phone } = friendItem;
+  const { imageUrl, url, title, address, email, phone, addressUrl } =
+    friendItem;
 
   const getWorkTime = friendItem.workDays?.find((day) => day.isOpen);
   return (
@@ -43,7 +44,7 @@ const FriendsItem = ({ friendItem }) => {
             <FriendsItemList>
               <FriendsItemDesc>
                 Email:
-                <a href={email}>
+                <a href={`mailto:${email}`}>
                   <FriendsItemText>
                     {email ? email : "website only"}
                   </FriendsItemText>
@@ -51,7 +52,7 @@ const FriendsItem = ({ friendItem }) => {
               </FriendsItemDesc>
               <FriendsItemDesc>
                 Address:
-                <a href={address}>
+                <a href={addressUrl} target="_blank" rel="noopener noreferrer">
                   <FriendsItemText>
                     {address ? address : "website only"}
                   </FriendsItemText>
@@ -59,7 +60,7 @@ const FriendsItem = ({ friendItem }) => {
               </FriendsItemDesc>
               <FriendsItemDesc>
                 Phone:
-                <a href={phone}>
+                <a href={`tel:${phone}`}>
                   <FriendsItemText>
                     {phone ? phone : "email only"}
                   </FriendsItemText>
