@@ -1,12 +1,17 @@
 import React from "react";
 
 import ModalPortal from "../ModalPortal/ModalPortal";
-import { AttentionText, ModalContainer } from "./AttentionModal.styled";
+import {
+  AttentionText,
+  ModalContainer,
+  ImgWrap,
+} from "./AttentionModal.styled";
 
 const AttentionModal = ({ onClose, open }) => {
   return (
     <ModalPortal onClose={onClose} open={open}>
       <ModalContainer>
+        <ImgWrap></ImgWrap>
         <AttentionText>
           {" "}
           We would like to remind you that certain functionality is available

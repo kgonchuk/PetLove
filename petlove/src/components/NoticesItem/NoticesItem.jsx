@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   LearnMoreBtn,
   LikeBtn,
@@ -16,6 +16,8 @@ import {
   StarWrap,
 } from "./NoticesItem.styled";
 import icon from "../../images/sprite.svg";
+import AttentionModal from "../ModalWindow/AttentionModal/AttentionModal";
+import { createPortal } from "react-dom";
 
 const NoticesItem = ({ noticeInfo, favorite }) => {
   const {
@@ -29,6 +31,8 @@ const NoticesItem = ({ noticeInfo, favorite }) => {
     category,
     comment,
   } = noticeInfo;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <NoticesContainer>
       <NoticessImgWrap>
@@ -69,13 +73,26 @@ const NoticesItem = ({ noticeInfo, favorite }) => {
       </NoticesInfoList>
       <NoticesInfoItemDesc>{comment}</NoticesInfoItemDesc>
       <NoticesFooter>
-        <LearnMoreBtn>Learn More</LearnMoreBtn>
+        <LearnMoreBtn type="button" onClick={() => setIsModalOpen(true)}>
+          Learn More
+        </LearnMoreBtn>
         <LikeBtn>
           <LikeIcon>
             <use href={`${icon}#favorite-heart`} />
           </LikeIcon>
         </LikeBtn>
       </NoticesFooter>
+      {/* {isModalOpen && (
+        <AttentionModal
+          onClose={() => setIsModalOpen(false)}
+          open={isModalOpen}
+        />
+      )} */}
+      {isModalOpen &&
+        createPortal(
+          <AttentionModal onClose={() => setIsModalOpen(false)} />,
+          document.body
+        )}
     </NoticesContainer>
   );
 };

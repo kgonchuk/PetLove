@@ -16,11 +16,11 @@ export const BackDrop = styled.div`
 `;
 
 export const Modal = styled.div`
-  border-radius: 30px;
   background-color: ${color.white};
   position: relative;
   width: auto;
-  /* display: flex;
+  border-radius: 30px;
+  display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -32,7 +32,7 @@ export const Modal = styled.div`
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%); */
+  transform: translate(-50%, -50%);
 `;
 export const CloseBtn = styled.button`
   position: absolute;
@@ -46,7 +46,7 @@ export const CloseBtn = styled.button`
   cursor: pointer;
 `;
 export const IconClose = styled.svg`
-  width: 6px;
-  height: 6px;
+  width: 12px;
+  height: 12px;
   stroke: ${color.black};
 `;
