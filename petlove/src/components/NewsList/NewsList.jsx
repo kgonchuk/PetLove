@@ -19,6 +19,7 @@ import Pagination from "../Pagination/Pagination";
 import SearchField from "../SearchField/SearchField";
 import { setKeyword } from "../../redux/news/newsSlice";
 import Title from "../Title/Title";
+import { useLocation } from "react-router-dom";
 
 const NewsList = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,9 @@ const NewsList = () => {
   const keyword = useSelector(selectKeyword);
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = useSelector(selectTotalPages);
+  const location = useLocation();
+
+  const isnewspage = (location.pathname === "/news").toString();
 
   useEffect(() => {
     dispatch(getAllNews({ keyword, currentPage }));
@@ -56,7 +60,7 @@ const NewsList = () => {
     <NewsContainer>
       <NewsHeadWrap>
         <Title>News</Title>
-        <SearchField onSearchSubmit={handleSearch} />
+        <SearchField onFilterSubmit={handleSearch} isnewspage={isnewspage} />
       </NewsHeadWrap>
       <ListNews>
         {results?.map((newItem) => (

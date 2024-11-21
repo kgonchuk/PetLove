@@ -1,38 +1,55 @@
 import React, { useState } from "react";
 import {
+  ClearBtn,
+  IconClear,
   IconSearch,
   SearchButton,
   SearchContainer,
   SearchInput,
-  SearchWraper,
 } from "./SearchField.styled";
 import icon from "../../images/sprite.svg";
 
-const SearchField = ({ onSearchSubmit }) => {
-  const [searchWorld, setSearchWord] = useState("");
+const SearchField = ({ onFilterSubmit, $isNoticesPage }) => {
+  const [filterWord, setFilterWord] = useState("");
 
-  const handleSearchChange = (e) => {
-    setSearchWord(e.target.value);
+  const handleFilterChange = (e) => {
+    setFilterWord(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSearchSubmit(searchWorld);
-    setSearchWord("");
+    onFilterSubmit(filterWord);
+    setFilterWord("");
+  };
+  const handleClear = () => {
+    setFilterWord("");
+    onFilterSubmit("");
   };
   return (
-    <SearchContainer onSubmit={handleSubmit}>
+    <SearchContainer onSubmit={handleSubmit} $isNoticesPage={$isNoticesPage}>
       <SearchInput
         type="text"
         placeholder="Search"
-        value={searchWorld}
-        onChange={handleSearchChange}
+        value={filterWord}
+        onChange={handleFilterChange}
+        $isNoticesPage={$isNoticesPage}
       />
-      <SearchButton>
+      <SearchButton type="submit" $isNoticesPage={$isNoticesPage}>
         <IconSearch>
           <use href={`${icon}#loupe`} />
         </IconSearch>
       </SearchButton>
+      {filterWord && (
+        <ClearBtn
+          type="button"
+          onClick={handleClear}
+          $isNoticesPage={$isNoticesPage}
+        >
+          <IconClear width="14" height="14">
+            <use xlinkHref={`${icon}#icon-cross-small`} />
+          </IconClear>
+        </ClearBtn>
+      )}
     </SearchContainer>
   );
 };

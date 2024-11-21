@@ -7,7 +7,6 @@ export const NoticesContainer = styled.li`
   border-radius: 16px;
   background-color: ${color.white};
   padding: 24px;
-  margin-bottom: 20px;
   @media only screen and (min-width: ${breakpoints.medium}) {
     max-width: 298px;
     margin-bottom: 0;

@@ -9,6 +9,7 @@ const color = {
   secondaryBlack: "rgba(38, 38, 38, 0.5)",
   textBlack: "rgba(43, 43, 42, 1)",
   backgroundBlur: "rgba(0, 0, 0, 0.3)",
+  backDrop: "rgba(38, 38, 38, 0.3)",
 };
 
 export default color;

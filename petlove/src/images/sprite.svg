@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <defs>
     <symbol id="icon-x" viewBox="0 0 32 32">
-      <path fill="none" stroke="#f9f9f9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.909" d="M24 8 8 24M8 8l16 16" style="stroke:var(--color1, #f9f9f9)"/>
+      <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.909" d="M24 8 8 24M8 8l16 16" style="stroke:var(--color1, #f9f9f9)"/>
     </symbol>
    
     <symbol id="icon-eye-off" viewBox="0 0 32 32">
@@ -91,6 +91,12 @@
 <svg id="favorite-heart" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
   <path d="M15.6286 3.4574C15.2456 3.07416 14.7907 2.77014 14.2901 2.56272C13.7895 2.3553 13.253 2.24854 12.7111 2.24854C12.1693 2.24854 11.6327 2.3553 11.1321 2.56272C10.6315 2.77014 10.1767 3.07416 9.79362 3.4574L8.99862 4.2524L8.20362 3.4574C7.42985 2.68364 6.3804 2.24894 5.28612 2.24894C4.19185 2.24894 3.14239 2.68364 2.36862 3.4574C1.59486 4.23117 1.16016 5.28063 1.16016 6.3749C1.16016 7.46918 1.59486 8.51864 2.36862 9.2924L3.16362 10.0874L8.99862 15.9224L14.8336 10.0874L15.6286 9.2924C16.0119 8.90934 16.3159 8.45451 16.5233 7.95392C16.7307 7.45333 16.8375 6.91677 16.8375 6.3749C16.8375 5.83304 16.7307 5.29648 16.5233 4.79589C16.3159 4.29529 16.0119 3.84047 15.6286 3.4574Z"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 </svg>
+<symbol id="icon-Vector" viewBox="0 0 64 32">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="8" d="M8 4l24 24 24-24"></path>
+</symbol>
+<symbol id="icon-cross-small" viewBox="0 0 32 32">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M25.333 6.667l-18.667 18.667M6.667 6.667l18.667 18.667"></path>
+</symbol>
   </defs>
 </svg>
 

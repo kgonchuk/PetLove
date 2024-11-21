@@ -6,6 +6,7 @@ import { useAuth } from "../hooks/useAuth";
 import { refreshUser } from "../redux/auth/authOperation";
 import RestrictedRoute from "./RestrictedRoute";
 import { Loader } from "./Loader/Loader.styled";
+import NoticesPage from "../pages/NoticesPage";
 
 const HomePage = lazy(() => import("../pages/HomePage"));
 const News = lazy(() => import("../pages/NewsPage"));
@@ -30,7 +31,7 @@ function App() {
         <Route index element={<Navigate to="/home" />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/news" element={<News />} />
-        <Route path="/notices" element={<Notices />} />
+        <Route path="/notices" element={<NoticesPage />} />
         <Route path="/friends" element={<Friends />} />
         <Route
           path="login"
