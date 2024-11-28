@@ -7,6 +7,7 @@ import { refreshUser } from "../redux/auth/authOperation";
 import RestrictedRoute from "./RestrictedRoute";
 import { Loader } from "./Loader/Loader.styled";
 import NoticesPage from "../pages/NoticesPage";
+import LoginPage from "../pages/LoginPage";
 
 const HomePage = lazy(() => import("../pages/HomePage"));
 const News = lazy(() => import("../pages/NewsPage"));

@@ -3,7 +3,6 @@ import * as Yup from "yup";
 import {
   AuthContainer,
   AuthText,
-  AuthTextRegister,
   AuthTitle,
   BtnContainer,
   ContainerForm,
@@ -24,7 +23,6 @@ import { useLocation } from "react-router-dom";
 import icon from "../../images/sprite.svg";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Notiflix from "notiflix";
 import { register } from "../../redux/auth/authOperation";
 
 const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;

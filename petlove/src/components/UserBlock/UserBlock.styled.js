@@ -60,4 +60,5 @@ export const UserItem = styled.li`
   margin-bottom: 10px;
   padding-left: 12px;
   padding-top: 12px;
+  color: ${color.black};
 `;

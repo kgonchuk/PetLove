@@ -1,8 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { register, logIn, logOut, refreshUser } from "./authOperation";
+import {
+  register,
+  logIn,
+  logOut,
+  refreshUser,
+  currentUser,
+  updateAvatar,
+  updateUser,
+  currentUserEdit,
+  currentUserFull,
+  editUserInfo,
+  getAllUserInfo,
+} from "./authOperation";
 
 const initialState = {
-  user: { name: null, email: null },
+  user: {
+    name: "",
+    email: "",
+    avatar: "",
+    phone: "",
+    token: "" || localStorage.getItem("token"),
+    isLoggedIn: false,
+  },
+
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
@@ -56,6 +76,35 @@ const authSlice = createSlice({
       .addCase(refreshUser.rejected, (state, action) => {
         state.isRefreshing = false;
       });
+    builder.addCase(editUserInfo.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.error = null;
+      state.user.avatar = action.payload.avatar;
+      state.user.name = action.payload.name;
+      state.user.email = action.payload.email;
+      state.user.phone = action.payload.phone;
+      state.petsList = action.payload.pets;
+    });
+    builder.addCase(editUserInfo.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(getAllUserInfo.pending, (state) => {
+      state.isLoading = true;
+      state.error = null;
+    });
+    builder.addCase(getAllUserInfo.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.error = null;
+      state.user.avatar = action.payload.avatar;
+      state.user.name = action.payload.name;
+      state.user.email = action.payload.email;
+      state.user.phone = action.payload.phone;
+    });
+    builder.addCase(getAllUserInfo.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    });
   },
 });
 

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import color from "../../../global/globalColors";
+import { breakpoints } from "../../../global/breakPoints";
 
 export const BackDrop = styled.div`
   position: fixed;
@@ -18,21 +19,23 @@ export const BackDrop = styled.div`
 export const Modal = styled.div`
   background-color: ${color.white};
   position: relative;
-  width: auto;
   border-radius: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 28px;
-  max-width: 335px;
-  width: 100%;
-  background-color: ${color.white};
   border-radius: 30px;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  padding: ${(props) => props.$styles.modalPadding};
+  width: ${(props) => props.$styles.modalWidth};
+
+  @media only screen and (min-width: ${breakpoints.medium}) {
+    padding: ${(props) => props.$styles.mediumModalPadding};
+    width: ${(props) => props.$styles.mediumModalWidth};
+  }
 `;
 export const CloseBtn = styled.button`
   position: absolute;

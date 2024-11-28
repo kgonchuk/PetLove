@@ -6,7 +6,7 @@ import { HeroCard } from "../components/HeroAvatar/HeroAvatar";
 import dog_avatar_x1 from "../images/🐶.png";
 import dog_avatar_x2 from "../images/🐶@2x.png";
 
-const Login = () => {
+const LoginPage = () => {
   return (
     <LoginContainer>
       <HeroImg>
@@ -24,4 +24,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;

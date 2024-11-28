@@ -138,3 +138,10 @@ export const LikeIcon = styled.svg`
   stroke: ${color.yellowPrimary};
   color: transparent;
 `;
+export const EmptyHeartIcon = styled.svg`
+  fill: ${color.yellowPrimary};
+  stroke: ${color.yellowPrimary};
+  color: ${color.yellowPrimary};
+  width: 20px;
+  height: 20px;
+`;
