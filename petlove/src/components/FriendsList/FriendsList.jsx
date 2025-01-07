@@ -5,7 +5,6 @@ import FriendsItem from "../FriendsItem/FriendsItem";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAllFriends } from "../../redux/friends/friendsSelector";
 import { getAllFriends } from "../../redux/friends/friends-operation";
-import NoticesList from "../NoticesList/NoticesList";
 
 const FriendsList = () => {
   const dispatch = useDispatch();

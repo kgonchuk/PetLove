@@ -54,7 +54,7 @@ export const ModalEditUploadWrap = styled.div`
   gap: 8px;
   margin-top: 20px;
 `;
-export const UploadBtn = styled.div`
+export const UploadBtn = styled.button`
   border: none;
   border-radius: 30px;
   background-color: ${color.yellowSecondary};

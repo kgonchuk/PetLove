@@ -72,11 +72,23 @@ export const refreshUser = createAsyncThunk(
     }
   }
 );
+
 export const editUserInfo = createAsyncThunk(
-  "user/editUserInfo",
-  async (editData, thunkAPI) => {
+  "userProfile/editUserInfo",
+  async (userData, thunkAPI) => {
     try {
-      const resp = await axios.patch("/users/current/edit", editData);
+      await axios.patch("users/current/edit", userData);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getAllUserInfo = createAsyncThunk(
+  "auth/getAllUserInfo",
+  async (_, thunkAPI) => {
+    try {
+      const resp = await axios.get("/users/current/full");
       return resp.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data.message);
@@ -84,14 +96,41 @@ export const editUserInfo = createAsyncThunk(
   }
 );
 
-export const getAllUserInfo = createAsyncThunk(
-  "user/getAllUserInfo",
-  async (_, thunkAPI) => {
+export const addMyPet = createAsyncThunk(
+  "auth/adMyPet",
+  async (PetData, thunkAPI) => {
     try {
-      const resp = await axios.get("/users/current/full");
-      return resp.data;
+      const { data } = await axios.post("/users/current/pets/add", PetData);
+      Notiflix.Notify.success("Welcome to PetLove project!");
+      return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message);
+      Notiflix.Notify.failure(error.response.data.message);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+export const addPet = createAsyncThunk(
+  "user/addPets",
+  async (userData, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const token = state.user.user.token;
+
+    try {
+      const response = await axios.post("/users/current/pets/add", userData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      Notiflix.Notify.success("Pet added successfully!");
+
+      return response.data;
+    } catch (error) {
+      Notiflix.Notify.failure(
+        "Failed to add pet: " +
+          (error.response?.data?.message || "Unknown error")
+      );
+
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );

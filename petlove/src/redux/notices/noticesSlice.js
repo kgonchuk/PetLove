@@ -361,11 +361,8 @@ const noticesSlice = createSlice({
       .addCase(fetchSpecies.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.species = payload;
+        state.filters.species = payload;
       })
-      // .addCase(fetchCities.fulfilled, (state, { payload }) => {
-      //   state.isLoading = false;
-      //   state.cities = payload;
-      // })
       .addCase(fetchAllLocations.fulfilled, (state, action) => {
         state.locations = action.payload;
       })

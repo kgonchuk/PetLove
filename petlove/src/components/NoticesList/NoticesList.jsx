@@ -5,35 +5,21 @@ import { useDispatch, useSelector } from "react-redux";
 import NoticesItem from "../NoticesItem/NoticesItem";
 import {
   NoticesContainer,
-  NoticesFilterContainer,
   PaginationContainer,
   NoticesWrap,
   NoticesFilterWrap,
-  ResetBtn,
-  NoticesSortWrap,
 } from "./NoticesList.styled";
 import {
-  selectAllNotices,
-  selectFilteredNotices,
-  selectFilters,
   selectFilterWord,
-  selectKeyword,
   selectNotices,
   selectNoticesHasMore,
-  selectNoticesItems,
   selectNoticesTotalPages,
-  selectQueryParams,
   selectSearchCategory,
   selectSearchGender,
   selectSearchLocation,
   selectSearchSpecies,
-  selectSortParam,
-  selectTotalPages,
 } from "../../redux/notices/noticesSelector";
-import {
-  fetchFavorite,
-  fetchNotices,
-} from "../../redux/notices/noticesOperation";
+import { fetchNotices } from "../../redux/notices/noticesOperation";
 import Title from "../Title/Title";
 import Pagination from "../Pagination/Pagination";
 import NoticesFilter from "../NoticesFilter/NoticesFilter";
@@ -77,7 +63,7 @@ const NoticesList = ({ isNoticesPage }) => {
   ]);
 
   const sortNotices = (notices) => {
-    const sorted = [...notices]; // Робимо копію масиву
+    const sorted = [...notices];
     switch (sortOrder) {
       case "popular":
         return sorted.sort((a, b) => b.popularity - a.popularity);

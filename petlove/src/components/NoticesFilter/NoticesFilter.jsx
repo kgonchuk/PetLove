@@ -475,10 +475,8 @@ import {
   setSpecies,
   updateFilters,
 } from "../../redux/notices/noticesSlice";
-import AsyncSelect from "react-select/async";
-import icon from "../../images/sprite.svg";
+
 import { LocationInput } from "../LocationInput/LocationInput";
-import { LocationLoupeIcon } from "../LocationInput/LocationInput.styled";
 
 const NoticesFilter = ($isNoticesPage) => {
   const dispatch = useDispatch();

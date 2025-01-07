@@ -61,3 +61,4 @@ export const selectCities = (state) => state.notices.cities;
 export const selectSearchLocation = (state) => state.notices.selectedLocation;
 export const selectFiltersLocation = (state) => state.notices.locations;
 export const selectFilters = (state) => state.notices.filters;
+export const SelectGetSpecies = (state) => state.notices.filters.species;

@@ -33,6 +33,7 @@ import {
 import EditUserBtn from "../EditUserBtn/EditUserBtn";
 import ModalEditUser from "../ModalWindow/ModalEditUser/ModalEditUser";
 import UserBlock from "../UserBlock/UserBlock";
+import PetsBlock from "../PetsBlock/PetsBlock";
 
 const UserCard = () => {
   const data = useSelector(selectUser);
@@ -47,13 +48,11 @@ const UserCard = () => {
     <>
       <UserCardSection>
         <EditUserBtn setOpenModal={() => setModalOpen(true)} />
-        <UserBlock data={data} setOpenModal={() => setModalOpen(true)} />
+        <UserBlock setOpenModal={() => setModalOpen(true)} />
+        <PetsBlock />
       </UserCardSection>
-      <ModalEditUser
-        open={modalOpen}
-        onClose={() => setModalOpen(false)}
-        userData={data}
-      />
+
+      <ModalEditUser open={modalOpen} onClose={() => setModalOpen(false)} />
     </>
   );
 };

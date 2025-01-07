@@ -8,6 +8,8 @@ import RestrictedRoute from "./RestrictedRoute";
 import { Loader } from "./Loader/Loader.styled";
 import NoticesPage from "../pages/NoticesPage";
 import LoginPage from "../pages/LoginPage";
+import { PrivateRoute } from "./PrivateRoute";
+import AddPetPage from "../pages/AddPetPage";
 
 const HomePage = lazy(() => import("../pages/HomePage"));
 const News = lazy(() => import("../pages/NewsPage"));
@@ -16,6 +18,7 @@ const Friends = lazy(() => import("../pages/Friends"));
 const Login = lazy(() => import("../pages/LoginPage"));
 const Registration = lazy(() => import("../pages/RegistrationPage"));
 const Profile = lazy(() => import("../pages/ProfilePage"));
+const AddPet = lazy(() => import("../pages/AddPetPage"));
 
 function App() {
   const dispatch = useDispatch();
@@ -49,6 +52,16 @@ function App() {
             />
           }
         />
+        <Route
+          path="/addPet"
+          element={<PrivateRoute redirectTo="/login" component={<AddPet />} />}
+        />
+        {/* <Route
+          path="/addPet"
+          element={
+            <PrivateRoute redirectTo="/login" component={<AddPetPage />} />
+          }
+        ></Route> */}
         <Route path="/profile" element={<Profile />} />
       </Route>
     </Routes>

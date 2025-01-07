@@ -4,13 +4,8 @@ import {
   logIn,
   logOut,
   refreshUser,
-  currentUser,
-  updateAvatar,
-  updateUser,
-  currentUserEdit,
-  currentUserFull,
-  editUserInfo,
   getAllUserInfo,
+  addPet,
 } from "./authOperation";
 
 const initialState = {
@@ -21,9 +16,11 @@ const initialState = {
     phone: "",
     token: "" || localStorage.getItem("token"),
     isLoggedIn: false,
+    noticesViewed: [],
+    noticesFavorites: [],
+    pets: [],
   },
 
-  token: null,
   isLoggedIn: false,
   isRefreshing: false,
   isLoading: false,
@@ -32,6 +29,11 @@ const initialState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
+  reducers: {
+    setAvatar(state, action) {
+      state.user.avatar = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(register.pending, (state, action) => {
@@ -75,37 +77,36 @@ const authSlice = createSlice({
       })
       .addCase(refreshUser.rejected, (state, action) => {
         state.isRefreshing = false;
+      })
+
+      // .addCase(getAllUserInfo.pending, (state) => {
+      //   state.isLoading = true;
+      //   state.error = null;
+      // })
+      // .addCase(getAllUserInfo.fulfilled, (state, action) => {
+      //   state.isLoading = false;
+      //   state.error = null;
+      //   state.user = action.payload;
+      //   state.user.avatar = action.payload.avatar;
+      //   state.user.name = action.payload.name;
+      //   state.user.email = action.payload.email;
+      //   state.user.phone = action.payload.phone;
+      //   state.user.noticesViewed = action.payload.noticesViewed;
+      //   state.user.noticesFavorites = action.payload.noticesFavorites;
+      //   state.user.pets = action.payload.pets;
+      // })
+
+      // .addCase(getAllUserInfo.rejected, (state, action) => {
+      //   state.isLoading = false;
+      //   state.error = action.payload;
+      // })
+
+      .addCase(addPet.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = action.payload;
       });
-    builder.addCase(editUserInfo.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.error = null;
-      state.user.avatar = action.payload.avatar;
-      state.user.name = action.payload.name;
-      state.user.email = action.payload.email;
-      state.user.phone = action.payload.phone;
-      state.petsList = action.payload.pets;
-    });
-    builder.addCase(editUserInfo.rejected, (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    });
-    builder.addCase(getAllUserInfo.pending, (state) => {
-      state.isLoading = true;
-      state.error = null;
-    });
-    builder.addCase(getAllUserInfo.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.error = null;
-      state.user.avatar = action.payload.avatar;
-      state.user.name = action.payload.name;
-      state.user.email = action.payload.email;
-      state.user.phone = action.payload.phone;
-    });
-    builder.addCase(getAllUserInfo.rejected, (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    });
   },
 });
 
+export const { setAvatar } = authSlice.actions;
 export const authReducer = authSlice.reducer;
