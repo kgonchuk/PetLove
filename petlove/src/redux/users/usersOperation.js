@@ -2,7 +2,7 @@ import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getFullUserInfo = createAsyncThunk(
-  "users/getFullUserInfo",
+  "userProfile/getFullUserInfo",
   async (_, thunkAPI) => {
     try {
       const res = await axios.get("users/current/full");
@@ -14,12 +14,13 @@ export const getFullUserInfo = createAsyncThunk(
 );
 
 export const editUserInfo = createAsyncThunk(
-  "users/editUserInfo",
-  async (userData, thunkAPI) => {
+  "user/editUserInfo",
+  async (editData, thunkAPI) => {
     try {
-      await axios.patch("users/current/edit", userData);
+      const resp = await axios.patch("/users/current/edit", editData);
+      return resp.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }
 );

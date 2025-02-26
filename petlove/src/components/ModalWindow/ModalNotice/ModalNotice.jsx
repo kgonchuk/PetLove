@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactStars from "react-rating-stars-component";
 import ModalPortal from "../ModalPortal/ModalPortal";
 import {
@@ -6,6 +6,7 @@ import {
   BtnContact,
   BtnRemove,
   EmptyHeartIcon,
+  FullHeartIcon,
   ImgCategory,
   ModalBtnWrap,
   ModalContainer,
@@ -31,23 +32,30 @@ import {
   removeFavorites,
 } from "../../../redux/favorite/favoriteOperations";
 
-const ModalNotice = ({ onClose, open, noticeInfo }) => {
+const ModalNotice = ({ onClose, open, noticeInfo, birthday }) => {
   const {
+    _id,
     imgURL,
     title,
     popularity,
     name,
-    birthday,
     sex,
     species,
     category,
     comment,
-    _id,
   } = noticeInfo;
-  const dispatch = useDispatch();
   const favorites = useSelector(selectFavorites);
+  const dispatch = useDispatch();
 
   const isInFavorites = favorites.some((favPet) => favPet._id === _id);
+
+  const normalizedRating = (rating) => {
+    const minRating = 3;
+    const maxRating = 273;
+    const normalizedRating =
+      ((rating - minRating) / (maxRating - minRating)) * 5;
+    return normalizedRating;
+  };
 
   const handleRemoveFavorites = async (id) => {
     await dispatch(removeFavorites(id));
@@ -57,14 +65,6 @@ const ModalNotice = ({ onClose, open, noticeInfo }) => {
   const handleAddFavorites = async (id) => {
     await dispatch(addFavorites(id));
     dispatch(getFavorites());
-  };
-
-  const normalizedRating = (rating) => {
-    const minRating = 3;
-    const maxRating = 273;
-    const normalizedRating =
-      ((rating - minRating) / (maxRating - minRating)) * 5;
-    return normalizedRating;
   };
 
   return (
@@ -112,9 +112,9 @@ const ModalNotice = ({ onClose, open, noticeInfo }) => {
           {isInFavorites ? (
             <BtnRemove type="button" onClick={() => handleRemoveFavorites(_id)}>
               Remove{" "}
-              <EmptyHeartIcon>
-                <use href={`${icon}#favorite-heart`} />
-              </EmptyHeartIcon>
+              <FullHeartIcon>
+                <use href={`${icon}#icon-trash-2`} />
+              </FullHeartIcon>
             </BtnRemove>
           ) : (
             <BtnAdd type="button" onClick={() => handleAddFavorites(_id)}>

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import {
+  Img,
   UserBlockContainer,
   UserImg,
+  UserInput,
   UserItem,
   UserList,
   UserTitle,
@@ -12,15 +14,22 @@ import userImg from "../../images/user.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectFullUserInfo,
-  selectUserAvatar,
+  selectUserData,
+  selectUserName,
 } from "../../redux/users/usersSelector";
 import { setAvatar } from "../../redux/users/usersSlice";
+import { selectUser } from "../../redux/auth/authSelector.js";
+import { selectUserAvatar } from "../../redux/users/usersSelector.js";
+import { getFullUserInfo } from "../../redux/auth/authOperation.js";
 
 const UserBlock = () => {
-  const userInfo = useSelector(selectFullUserInfo);
+  const user = useSelector(selectUser);
   const useAvatar = useSelector(selectUserAvatar);
-
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getFullUserInfo());
+  }, [dispatch]);
 
   const handleFileChange = async (e) => {
     const { type, files } = e.target;
@@ -46,34 +55,27 @@ const UserBlock = () => {
     <UserBlockContainer>
       {useAvatar ? (
         <UserImg>
-          <img src={useAvatar} alt="avatar" />
+          <Img src={useAvatar} alt="User avatar" />
         </UserImg>
       ) : (
         <div>
           <UserImg>
-            {" "}
-            <img src={userImg} alt="User Avatar" />
+            <Img src={userImg} alt="User Avatar" />
           </UserImg>
-          <UserUploadBtn onClick={triggerFileInput}>
-            {" "}
-            Upload photo
-          </UserUploadBtn>
-          <input
-            type="file"
-            id="fileInput"
-            style={{ display: "none" }}
-            accept="image/*"
-            onChange={handleFileChange}
-          />
+          <span>Upload photo</span>
         </div>
       )}
 
       <UserTitle>My information</UserTitle>
       <UserList>
-        <UserItem> {userInfo.name}</UserItem>
-        <UserItem>{userInfo.email}</UserItem>
         <UserItem>
-          {userInfo.phone === "" ? "+380" : `${userInfo.phone}`}
+          <UserInput value={` ${user.name || "Name"}`} />
+        </UserItem>
+        <UserItem>
+          <UserInput value={`${user.email || "name@gmail.com"}`} />
+        </UserItem>
+        <UserItem>
+          <UserInput value={` ${user.phone || "+380"}`} readOnly />
         </UserItem>
       </UserList>
     </UserBlockContainer>

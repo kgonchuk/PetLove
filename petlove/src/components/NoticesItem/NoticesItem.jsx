@@ -21,15 +21,104 @@ import AttentionModal from "../ModalWindow/AttentionModal/AttentionModal";
 import ModalNotice from "../ModalWindow/ModalNotice/ModalNotice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsLoggedIn } from "../../redux/auth/authSelector";
-import { selectFavorites } from "../../redux/favorite/favoriteSelectors";
+import {
+  selectFavorites,
+  selectViewed,
+} from "../../redux/favorite/favoriteSelectors";
 import {
   addFavorites,
   getFavorites,
   removeFavorites,
 } from "../../redux/favorite/favoriteOperations";
 
-const NoticesItem = ({ noticeInfo, favorite }) => {
+import { parseISO, format } from "date-fns";
+import {
+  addFavoriteNotice,
+  addNoticeToViewed,
+  deleteFavoriteNotice,
+} from "../../redux/auth/authOperation";
+
+import Notiflix from "notiflix";
+import { setViewedNotices } from "../../redux/auth/authSlice";
+import { useAuth } from "../../hooks/useAuth";
+
+const NoticesItem = ({ noticeInfo }) => {
+  // const {
+  //   imgURL,
+  //   title,
+  //   popularity,
+  //   name,
+  //   birthday,
+  //   sex,
+  //   species,
+  //   category,
+  //   comment,
+  //   _id,
+  // } = noticeInfo;
+
+  // const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isFavorite, setIsFavorite] = useState(false);
+  // const isAuthenticated = useSelector(selectIsLoggedIn);
+  // const dispatch = useDispatch();
+  // const favorites = useSelector(selectFavorites);
+  // const viewed = useSelector(selectViewed);
+  // const isInFavorites = favorites.some((favPet) => favPet._id === _id);
+
+  // const handleAddFavorites = async (id) => {
+  //   if (!isInFavorites) {
+  //     await dispatch(addFavorites(id));
+  //     dispatch(getFavorites());
+  //   } else {
+  //     await dispatch(removeFavorites(id));
+  //     dispatch(getFavorites());
+  //   }
+  // };
+
+  // const formatedDate = () => {
+  //   if (birthday) {
+  //     const date = parseISO(birthday);
+  //     return format(date, "dd.MM.yyyy");
+  //   }
+  // };
+
+  // const handleLearnMore = () => {
+  //   setIsModalOpen(true);
+  //   if (isModalOpen) {
+  //     dispatch(setViewedNotices(noticeInfo));
+  //     Notiflix.Notify.success("success");
+  //   }
+  // };
+
+  // const handleFavoriteClick = () => {
+  //   if (!isAuthenticated) {
+  //     setIsModalOpen(true);
+  //   } else {
+  //     const localFavorites =
+  //       JSON.parse(localStorage.getItem("favorites")) || [];
+  //     if (isFavorite) {
+  //       dispatch(deleteFavoriteNotice(noticeInfo._id));
+  //       const updatedFavorites = localFavorites.filter(
+  //         (id) => id !== noticeInfo._id
+  //       );
+  //       localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+  //       setIsFavorite(false);
+  //     } else {
+  //       dispatch(addFavoriteNotice(noticeInfo._id));
+  //       localStorage.setItem(
+  //         "favorites",
+  //         JSON.stringify([...localFavorites, noticeInfo._id])
+  //       );
+  //       setIsFavorite(true);
+  //     }
+  //   }
+  // };
+
+  // const handleToggleFavoriteFromModal = () => {
+  //   handleFavoriteClick();
+  // };
+
   const {
+    _id,
     imgURL,
     title,
     popularity,
@@ -39,12 +128,13 @@ const NoticesItem = ({ noticeInfo, favorite }) => {
     species,
     category,
     comment,
-    _id,
   } = noticeInfo;
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const { isLoggedIn } = useAuth;
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const dispatch = useDispatch();
   const favorites = useSelector(selectFavorites);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const isAuthenticated = useSelector(selectIsLoggedIn);
 
   const isInFavorites = favorites.some((favPet) => favPet._id === _id);
 
@@ -55,6 +145,22 @@ const NoticesItem = ({ noticeInfo, favorite }) => {
     } else {
       await dispatch(removeFavorites(id));
       dispatch(getFavorites());
+    }
+  };
+
+  const formatedDate = () => {
+    if (birthday) {
+      const date = parseISO(birthday);
+      return format(date, "dd.MM.yyyy");
+    }
+  };
+
+  const handleLearnMore = () => {
+    setIsModalOpen(!isModalOpen);
+
+    if (isModalOpen) {
+      dispatch(setViewedNotices(noticeInfo));
+      Notiflix.Notify.success("success");
     }
   };
 
@@ -98,13 +204,13 @@ const NoticesItem = ({ noticeInfo, favorite }) => {
       </NoticesInfoList>
       <NoticesInfoItemDesc>{comment}</NoticesInfoItemDesc>
       <NoticesFooter>
-        <LearnMoreBtn type="button" onClick={() => setIsModalOpen(true)}>
+        <LearnMoreBtn type="button" onClick={handleLearnMore}>
           Learn More
         </LearnMoreBtn>
         <LikeBtn type="button" onClick={() => handleAddFavorites(_id)}>
           {isInFavorites ? (
             <EmptyHeartIcon>
-              <use href={`${icon}#favorite-heart`} />
+              <use href={`${icon}#icon-trash-2`} />
             </EmptyHeartIcon>
           ) : (
             <LikeIcon>
@@ -113,13 +219,14 @@ const NoticesItem = ({ noticeInfo, favorite }) => {
           )}
         </LikeBtn>
       </NoticesFooter>
-      {isModalOpen && isAuthenticated && (
+      {isModalOpen && isLoggedIn && (
         <ModalNotice
           onClose={() => setIsModalOpen(false)}
           noticeInfo={noticeInfo}
+          birthday={formatedDate}
         />
       )}
-      {isModalOpen && !isAuthenticated && (
+      {isModalOpen && !isLoggedIn && (
         <AttentionModal onClose={() => setIsModalOpen(false)} />
       )}
     </NoticesContainer>

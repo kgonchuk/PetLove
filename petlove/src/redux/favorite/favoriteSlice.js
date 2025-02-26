@@ -34,6 +34,7 @@ const favoritesSlice = createSlice({
       .addCase(getFavorites.fulfilled, (state, action) => {
         state.isLoading = false;
         state.favorites = action.payload.noticesFavorites;
+        // state.viewedNotices = action.payload.noticesViewed;
       })
       .addCase(getFavorites.rejected, (state, action) => {
         state.isLoading = false;

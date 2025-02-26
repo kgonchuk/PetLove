@@ -3,12 +3,12 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getFavorites = createAsyncThunk(
   "favorites/getFavorites",
-  async (_, thunkAPI) => {
+  async (_, thunkApi) => {
     try {
-      const res = await axios.get("users/current");
-      return res.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      const { data } = await axios.get("/users/current/full");
+      return data;
+    } catch (err) {
+      return thunkApi.rejectWithValue(err.message);
     }
   }
 );

@@ -5,9 +5,10 @@
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
-    "@hookform/resolvers": "^3.9.1",
+    "@hookform/resolvers": "^3.10.0",
     "@mui/material": "^6.2.1",
     "@mui/styled-engine-sc": "^6.1.5",
+    "@redux-devtools/extension": "^3.3.0",
     "@reduxjs/toolkit": "^2.2.8",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -60,6 +61,7 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "remote-redux-devtools": "^0.5.16"
   }
 }

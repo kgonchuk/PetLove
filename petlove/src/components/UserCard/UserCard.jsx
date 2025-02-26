@@ -25,23 +25,22 @@ import {
   selectUser,
   selectUserEmail,
 } from "../../redux/auth/authSelector";
-import {
-  currentUser,
-  currentUserFull,
-  getAllUserInfo,
-} from "../../redux/auth/authOperation";
+import { currentUser, currentUserFull } from "../../redux/auth/authOperation";
 import EditUserBtn from "../EditUserBtn/EditUserBtn";
 import ModalEditUser from "../ModalWindow/ModalEditUser/ModalEditUser";
 import UserBlock from "../UserBlock/UserBlock";
 import PetsBlock from "../PetsBlock/PetsBlock";
+import { getFullUserInfo } from "../../redux/users/usersOperation";
+import LogOutBtn from "../LogOutBtn/LogOutBtn";
 
 const UserCard = () => {
   const data = useSelector(selectUser);
+
   const [modalOpen, setModalOpen] = useState(false);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    if (!data.email) dispatch(getAllUserInfo());
+    if (!data.email) dispatch(getFullUserInfo());
   }, [dispatch, data]);
 
   return (
@@ -50,9 +49,14 @@ const UserCard = () => {
         <EditUserBtn setOpenModal={() => setModalOpen(true)} />
         <UserBlock setOpenModal={() => setModalOpen(true)} />
         <PetsBlock />
+        <LogOutBtn />
       </UserCardSection>
 
-      <ModalEditUser open={modalOpen} onClose={() => setModalOpen(false)} />
+      <ModalEditUser
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        userData={data}
+      />
     </>
   );
 };

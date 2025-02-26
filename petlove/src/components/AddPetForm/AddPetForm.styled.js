@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import color from "../../global/globalColors";
 import Select from "react-select";
+import { breakpoints } from "../../global/breakPoints";
 
 export const AddPetFormContainer = styled.section`
   border-radius: 30px;
@@ -88,6 +89,45 @@ export const ImageWrap = styled.div`
   align-items: center;
   justify-content: center;
   margin: 8px auto;
+`;
+
+export const ModalEditUploadWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+`;
+export const UploadBtn = styled.button`
+  border: none;
+  border-radius: 30px;
+  background-color: ${color.yellowSecondary};
+  color: ${color.black};
+  padding: 12px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.33;
+  letter-spacing: -0.02em;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  width: 126px;
+  padding: 12px 0;
+  label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  @media only screen and (min-width: ${breakpoints.medium}) {
+    width: 146px;
+    font-size: 14px;
+    line-height: 1.28;
+    padding: 12px 0;
+  }
+`;
+export const UploadIcon = styled.svg`
+  width: 18px;
+  height: 18px;
 `;
 export const UploadInputWrap = styled.div`
   display: flex;

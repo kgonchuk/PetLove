@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import Notiflix from "notiflix";
 
 export const instance = axios.create({
   baseURL: "https://petlove.b.goit.study/api",
@@ -17,7 +18,7 @@ export const fetchNotices = createAsyncThunk(
       }
 
       const queryParams = {
-        page: page || 1, // встановлює значення за замовчуванням, якщо page === null або undefined
+        page: page || 1,
         limit: limit || 6,
         category: category || "",
         species: species || "",
@@ -83,26 +84,6 @@ export const fetchCities = createAsyncThunk(
   }
 );
 
-export const fetchNoticeById = createAsyncThunk(
-  "notices/fetchNoticeById",
-  async (_id, { getState, rejectWithValue }) => {
-    const state = getState();
-    const token = state.auth.token;
-
-    try {
-      const { data } = await instance.get(`/notices/${_id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log(data);
-
-      return data;
-    } catch (err) {
-      return rejectWithValue(err.message);
-    }
-  }
-);
 export const fetchAllLocations = createAsyncThunk(
   "notices/fetchAllLocations",
   async (_, { rejectWithValue }) => {
@@ -123,6 +104,44 @@ export const fetchLocations = createAsyncThunk(
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const fetchFavorite = createAsyncThunk(
+  "notices/fetchFavorite",
+  async (_id, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const token = state.user.user.token;
+    try {
+      const response = await axios.get(`/notices/${_id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const fetchViewed = createAsyncThunk(
+  "notices/fetchViewed",
+  async (_id, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const token = state.user.user.token;
+    try {
+      const response = await axios.get(`/notices/${_id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );

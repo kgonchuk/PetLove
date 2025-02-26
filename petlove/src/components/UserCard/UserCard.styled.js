@@ -5,6 +5,9 @@ export const UserCardSection = styled.section`
   border-radius: 30px;
   background-color: ${color.white};
   padding: 18px 20px;
+  @media only screen and (min-width: ${breakpoints.medium}) {
+    padding: 40px 40px;
+  }
 `;
 
 export const UserCardWrap = styled.div`

@@ -1,33 +1,27 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import {
-  selectPets,
-  selectUserNoticesViewed,
-  selectUserPets,
-} from "../../redux/auth/authSelector";
-import { ListItem, PetsListContainer } from "./PetsList.styled";
 import PetItem from "../PetItem/PetItem";
+import { useSelector } from "react-redux";
+import { selectPets } from "../../redux/auth/authSelector";
+import { PetsListContainer, PetsListWrap } from "./PetsList.styled";
 
-const PetsList = () => {
-  const pets = useSelector(selectUserPets);
+export const PetsList = () => {
+  const pets = useSelector(selectPets);
+
   return (
-    // <>
-    //   <PetsListContainer>
-    //     {pets?.map((el) => (
-    //       <ListItem key={el._id}>
-    //         <PetItem petItem={el} />
-    //       </ListItem>
-    //     ))}
-    //   </PetsListContainer>
-    // </>
-    <div>
-      <ul>
-        {pets?.map((petItem) => (
-          <PetItem key={petItem._id} pet={petItem} />
+    <PetsListContainer>
+      <PetsListWrap>
+        {pets?.map((el) => (
+          <li
+            key={el._id}
+            sx={{
+              p: 0,
+              mb: "24px",
+            }}
+          >
+            <PetItem props={el} />
+          </li>
         ))}
-      </ul>
-    </div>
+      </PetsListWrap>
+    </PetsListContainer>
   );
 };
-
 export default PetsList;

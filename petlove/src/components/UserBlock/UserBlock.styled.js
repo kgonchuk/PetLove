@@ -8,15 +8,19 @@ export const UserBlockContainer = styled.div`
 export const UserImg = styled.div`
   width: 94px;
   height: 94px;
-  border-radius: 100px;
+  border-radius: 50%;
   overflow: hidden;
-  margin: 0 auto 8px;
+  margin: 0 auto 28px;
   @media only screen and (min-width: ${breakpoints.medium}) {
     width: 110px;
     height: 110px;
   }
 `;
-export const Img = styled.img``;
+export const Img = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
 export const UserUploadBtn = styled.button`
   background-color: transparent;
   border: none;
@@ -52,13 +56,16 @@ export const UserList = styled.ul`
     gap: 14px;
   }
 `;
-export const UserItem = styled.li`
+export const UserItem = styled.li``;
+export const UserInput = styled.input`
   border: 1px solid ${color.yellowPrimary};
   border-radius: 30px;
   width: 281px;
   height: 42px;
   margin-bottom: 10px;
+  padding: 0;
   padding-left: 12px;
-  padding-top: 12px;
+  /* padding-left: 12px; */
+  /* padding-top: 12px; */
   color: ${color.black};
 `;

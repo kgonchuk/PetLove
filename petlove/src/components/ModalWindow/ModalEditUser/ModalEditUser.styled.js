@@ -26,7 +26,7 @@ export const ModalEditText = styled.h2`
 export const ImageWrap = styled.div`
   width: 80px;
   height: 80px;
-  border-radius: 50%;
+
   display: flex;
   justify-content: center;
   margin: 0 auto;
@@ -40,6 +40,7 @@ export const Img = styled.img`
   height: 80px;
   object-fit: cover;
   object-position: center;
+  border-radius: 50%;
 
   @media screen and (min-width: 768px) {
     width: 86px;
